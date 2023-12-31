@@ -1,0 +1,8 @@
+.navbar-expand-lg {
+  background-color: #ffc564;
+  box-shadow: 10px 5px rgba(255, 197, 100, 0.5);
+}
+
+.navbar-brand {
+  color: #fff;
+}
