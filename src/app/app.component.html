@@ -1,14 +1,42 @@
- <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid d-flex justify-content-center">
-      <a class="navbar-brand font-monospace" href="/">GERENCIAMENTO DE TAREFAS</a>
-    </div>
- </nav>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid d-flex justify-content-center">
+    <a class="navbar-brand font-monospace" href="/">GERENCIAMENTO DE TAREFAS</a>
+  </div>
+</nav>
 
- <div class="row d-flex flex-wrap text-center font-monospace mt-4">
-   <div class="col-6">
-     <img src="assets/drawkit-daily-life-vector-illustration-07.svg" alt="Imagem de um ambiente com estante de livros, listas de tarefas coladas na parede e uma mesa de escritório"/>
-   </div>
-   <div class="col-6">
-     <h4>Comece a gerenciar as suas tarefas aqui!</h4>
-   </div>
- </div>
+<div class="row d-flex flex-wrap text-center font-monospace mt-4">
+  <div class="col-6">
+    <img src="assets/drawkit-daily-life-vector-illustration-07.svg"
+         alt="Imagem de um ambiente com estante de livros, listas de tarefas coladas na parede e uma mesa de escritório"/>
+  </div>
+  <div class="col-6">
+    <h4 *ngIf="showText">Comece a gerenciar as suas tarefas aqui!</h4>
+
+    <button *ngIf="showText" class="btn btn-outline-warning collapsed" type="button"
+            (click)="showText = false; openCollapse = !openCollapse"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+      <i class="pi pi-plus"></i> Nova tarefa
+    </button>
+    <div *ngIf="!showText" class="text-start">
+      <button class="btn" type="button"
+              (click)="showText = true; openCollapse = false">
+        <i class="pi pi-arrow-left"></i>
+      </button>
+    </div>
+
+
+    <div class="collapse" id="collapse" [ngClass]="{ 'show': openCollapse }">
+      <div class="text-start">
+        <label for="inputDescription" class="form-label mt-4 fw-bold">Descrição</label>
+        <input type="text" id="inputDescription" class="form-control w-75 focus-ring py-1 px-2"
+               style="--bs-focus-ring-color: rgba(var(--bs-warning-rgb), .25)">
+
+        <button class="btn btn btn-warning mt-4">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
