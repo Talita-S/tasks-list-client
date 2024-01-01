@@ -1,6 +1,8 @@
+@import "primeicons/primeicons.css";
+
 .navbar-expand-lg {
   background-color: #ffc564;
-  box-shadow: 10px 5px rgba(255, 197, 100, 0.5);
+  box-shadow: 5px 10px 10px rgba(255, 197, 100, 0.5);
 }
 
 .navbar-brand {
@@ -10,4 +12,3 @@
 img {
   width: 100%;
 }
-
