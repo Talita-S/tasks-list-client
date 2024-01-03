@@ -30,7 +30,7 @@
       <div class="text-start">
         <label for="inputDescription" class="form-label mt-4 fw-bold">Descrição</label>
         <input type="text" id="inputDescription" class="form-control w-75 focus-ring py-1 px-2"
-               style="--bs-focus-ring-color: rgba(var(--bs-warning-rgb), .25)">
+               style="--bs-focus-ring-color: rgba(var(--bs-warning-rgb), .25)" [formControl]="description">
 
         <button class="btn btn btn-warning mt-4">
           Adicionar

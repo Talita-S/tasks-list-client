@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,6 @@ export class AppComponent {
   title = 'tasks-list';
   showText = true;
   openCollapse = false;
+
+  description = new FormControl('');
 }
