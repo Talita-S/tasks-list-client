@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
+import {Task} from './requisicao/task';
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,46 @@ export class AppComponent {
   title = 'tasks-list';
   showText = true;
   openCollapse = false;
+  showSuccess = false;
+  showFailure = false;
 
-  description = new FormControl('');
+  baseUrl = 'http://localhost:8080/tasks';
+
+  description = new FormControl('', Validators.required);
+
+  constructor(private http: HttpClient) {
+  }
+
+  addTask(): void {
+    this.description.markAsTouched();
+    let task: Task = {
+      description: this.description.value!,
+      done: false
+    };
+
+    this.http
+      .post<HttpResponse<Response>>(
+        this.baseUrl,
+        JSON.stringify(task),
+        {headers: new HttpHeaders({'Content-Type': 'application/json'})}
+      )
+      .subscribe(
+        () => {
+          this.openCollapse = false;
+          this.showText = true;
+          this.showSuccess = true;
+          this.description.setValue('');
+          setTimeout(() => {
+            this.showSuccess = false
+          }, 5000)
+        },
+        (error) => {
+          this.showFailure = true;
+          setTimeout(() => {
+            this.showFailure = false
+          }, 5000)
+          console.log(error)
+        }
+      );
+  }
 }

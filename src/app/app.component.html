@@ -4,12 +4,31 @@
   </div>
 </nav>
 
+<div class="toast fade show mt-2" role="alert" aria-live="assertive" aria-atomic="true"
+     style="width: 100%" *ngIf="showSuccess">
+  <div class="toast-header">
+    <i class="pi pi-check-square" style="color: #b0a81f"></i>
+    <strong class="me-auto m-1" style="color: #b0a81f">Tarefa criada com sucesso!</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+
+<div class="toast fade show mt-2" role="alert" aria-live="assertive" aria-atomic="true"
+     style="width: 100%" *ngIf="showFailure">
+  <div class="toast-header">
+    <i class="pi pi-times-circle" style="color: #ff2e5a"></i>
+    <strong class="me-auto m-1" style="color: #ff2e5a">Ops, algo deu errado. Tente novamente.</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+
 <div class="row d-flex flex-wrap text-center font-monospace mt-4">
   <div class="col-6">
     <img src="assets/drawkit-daily-life-vector-illustration-07.svg"
          alt="Imagem de um ambiente com estante de livros, listas de tarefas coladas na parede e uma mesa de escritório"/>
   </div>
   <div class="col-6">
+
     <h4 *ngIf="showText">Comece a gerenciar as suas tarefas aqui!</h4>
 
     <button *ngIf="showText" class="btn btn-outline-warning collapsed" type="button"
@@ -27,12 +46,13 @@
 
 
     <div class="collapse" id="collapse" [ngClass]="{ 'show': openCollapse }">
-      <div class="text-start">
+      <div class="has-validation text-start">
         <label for="inputDescription" class="form-label mt-4 fw-bold">Descrição</label>
-        <input type="text" id="inputDescription" class="form-control w-75 focus-ring py-1 px-2"
-               style="--bs-focus-ring-color: rgba(var(--bs-warning-rgb), .25)" [formControl]="description">
+        <input type="text" id="inputDescription" class="form-control w-75" [formControl]="description"
+               [ngClass]="description.errors?.['required'] && description.touched ? 'is-invalid' : 'is-valid'"/>
+        <div class="invalid-feedback">Campo obrigatório.</div>
 
-        <button class="btn btn btn-warning mt-4">
+        <button class="btn btn btn-warning mt-4" (click)="addTask()">
           Adicionar
         </button>
       </div>
