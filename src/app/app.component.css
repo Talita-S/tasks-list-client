@@ -12,3 +12,20 @@
 img {
   width: 100%;
 }
+
+.form-check-input {
+  border-width: medium;
+}
+
+.form-check-input:checked {
+  background-color: #f1b104;
+  border-color: #f1b104;
+}
+
+.form-check-input:focus {
+  border-color: #f1b104;
+}
+
+.form-check-label {
+  font-size: 18px;
+}

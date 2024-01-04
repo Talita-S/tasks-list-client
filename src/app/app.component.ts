@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {Task} from './requisicao/task';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
@@ -9,18 +9,23 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'tasks-list';
   showText = true;
   openCollapse = false;
   showSuccess = false;
   showFailure = false;
+  tasks: any = [];
 
   baseUrl = 'http://localhost:8080/tasks';
 
   description = new FormControl('', Validators.required);
 
   constructor(private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.getTasks();
   }
 
   addTask(): void {
@@ -45,6 +50,7 @@ export class AppComponent {
           setTimeout(() => {
             this.showSuccess = false
           }, 5000)
+          window.location.reload();
         },
         (error) => {
           this.showFailure = true;
@@ -54,5 +60,14 @@ export class AppComponent {
           console.log(error)
         }
       );
+  }
+
+  getTasks(): void {
+    this.http.get(this.baseUrl).subscribe((data) => {
+        this.tasks = data || [];
+      },
+      (error) => {
+        console.log(error)
+      })
   }
 }
