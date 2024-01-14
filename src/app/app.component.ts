@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Task } from './requisicao/task';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Task } from './request/task';
 
 @Component({
   selector: 'app-root',
