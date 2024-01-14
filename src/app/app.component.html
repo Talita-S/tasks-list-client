@@ -133,7 +133,13 @@
           >
             <i class="pi pi-file-edit"></i>
           </button>
-          <button class="btn" type="button" style="color: #ff2e5a">
+          <button
+            class="btn"
+            type="button"
+            style="color: #ff2e5a"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="'#deleteModal' + task.id"
+          >
             <i class="pi pi-trash"></i>
           </button>
         </div>
@@ -193,6 +199,40 @@
                   (click)="updateTask(task.id, finishedTask)"
                 >
                   ATUALIZAR
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal" tabindex="-1" [attr.id]="'deleteModal' + task.id">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Excluir Tarefa</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body text-start">
+                <p>Deseja mesmo excluir a tarefa?</p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  CANCELAR
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="deleteTask(task.id)"
+                >
+                  EXCLUIR
                 </button>
               </div>
             </div>

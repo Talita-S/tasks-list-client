@@ -106,4 +106,19 @@ export class AppComponent implements OnInit {
         }
       );
   }
+
+  deleteTask(id: number): void {
+    this.http.delete<HttpResponse<Response>>(this.baseUrl + `/${id}`).subscribe(
+      () => {
+        this.showSuccess = true;
+        setTimeout(() => {
+          this.showSuccess = false;
+        }, 5000);
+        window.location.reload();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }
