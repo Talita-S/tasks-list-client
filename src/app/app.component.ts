@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
 
   description = new FormControl('', Validators.required);
   updateDescription = new FormControl('', Validators.required);
+  finishedTask: boolean = false;
+  done!: boolean;
 
   constructor(private http: HttpClient) {}
 
@@ -68,5 +70,40 @@ export class AppComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  updateTask(id: number, isFinished: boolean): void {
+    if (this.updateDescription.errors) {
+      return;
+    }
+    let updatedTask: Task = {
+      description: this.updateDescription.value!,
+      done: isFinished,
+    };
+
+    this.http
+      .put<HttpResponse<Response>>(
+        this.baseUrl + `/${id}`,
+        JSON.stringify(updatedTask),
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        }
+      )
+      .subscribe(
+        () => {
+          this.showSuccess = true;
+          setTimeout(() => {
+            this.showSuccess = false;
+          }, 5000);
+          window.location.reload();
+        },
+        (error) => {
+          this.showFailure = true;
+          setTimeout(() => {
+            this.showFailure = false;
+          }, 5000);
+          console.log(error);
+        }
+      );
   }
 }
