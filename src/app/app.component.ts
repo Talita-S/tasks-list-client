@@ -12,7 +12,9 @@ export class AppComponent implements OnInit {
   title = 'tasks-list';
   showText = true;
   openCollapse = false;
-  showSuccess = false;
+  showAddSuccess = false;
+  showUpdateSuccess = false;
+  showDeleteSuccess = false;
   showFailure = false;
   tasks: any = [];
 
@@ -44,18 +46,23 @@ export class AppComponent implements OnInit {
         () => {
           this.openCollapse = false;
           this.showText = true;
-          this.showSuccess = true;
+          this.showAddSuccess = true;
           this.description.setValue('');
           setTimeout(() => {
-            this.showSuccess = false;
-          }, 5000);
-          window.location.reload();
+            this.showAddSuccess = false;
+          }, 3000);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         },
         (error) => {
           this.showFailure = true;
           setTimeout(() => {
             this.showFailure = false;
-          }, 5000);
+          }, 3000);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           console.log(error);
         }
       );
@@ -91,17 +98,22 @@ export class AppComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.showSuccess = true;
+          this.showUpdateSuccess = true;
           setTimeout(() => {
-            this.showSuccess = false;
-          }, 5000);
-          window.location.reload();
+            this.showUpdateSuccess = false;
+          }, 3000);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         },
         (error) => {
           this.showFailure = true;
           setTimeout(() => {
             this.showFailure = false;
-          }, 5000);
+          }, 3000);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           console.log(error);
         }
       );
@@ -110,13 +122,22 @@ export class AppComponent implements OnInit {
   deleteTask(id: number): void {
     this.http.delete<HttpResponse<Response>>(this.baseUrl + `/${id}`).subscribe(
       () => {
-        this.showSuccess = true;
+        this.showDeleteSuccess = true;
         setTimeout(() => {
-          this.showSuccess = false;
-        }, 5000);
-        window.location.reload();
+          this.showDeleteSuccess = false;
+        }, 3000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       },
       (error) => {
+        this.showFailure = true;
+        setTimeout(() => {
+          this.showFailure = false;
+        }, 3000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
         console.log(error);
       }
     );
