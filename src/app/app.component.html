@@ -4,49 +4,29 @@
   </div>
 </nav>
 
-<div
-  class="toast fade show mt-2"
-  role="alert"
-  aria-live="assertive"
-  aria-atomic="true"
-  style="width: 100%"
-  *ngIf="showSuccess"
->
-  <div class="toast-header">
-    <i class="pi pi-check-square" style="color: #b0a81f"></i>
-    <strong class="me-auto m-1" style="color: #b0a81f"
-      >Tarefa criada com sucesso!</strong
-    >
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="toast"
-      aria-label="Close"
-    ></button>
-  </div>
-</div>
+<app-message
+  *ngIf="showAddSuccess"
+  color="color: #b0a81f"
+  message="Tarefa criada com sucesso!"
+></app-message>
 
-<div
-  class="toast fade show mt-2"
-  role="alert"
-  aria-live="assertive"
-  aria-atomic="true"
-  style="width: 100%"
+<app-message
+  *ngIf="showUpdateSuccess"
+  color="color: #b0a81f"
+  message="Tarefa atualizada com sucesso!"
+></app-message>
+
+<app-message
+  *ngIf="showDeleteSuccess"
+  color="color: #b0a81f"
+  message="Tarefa excluída com sucesso!"
+></app-message>
+
+<app-message
   *ngIf="showFailure"
->
-  <div class="toast-header">
-    <i class="pi pi-times-circle" style="color: #ff2e5a"></i>
-    <strong class="me-auto m-1" style="color: #ff2e5a"
-      >Ops, algo deu errado. Tente novamente.</strong
-    >
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="toast"
-      aria-label="Close"
-    ></button>
-  </div>
-</div>
+  color="color: #ff2e5a"
+  message="Ops, algo deu errado. Tente novamente."
+></app-message>
 
 <div class="row d-flex flex-wrap text-center font-monospace mt-4">
   <div class="col-6">
