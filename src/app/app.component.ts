@@ -44,6 +44,8 @@ export class AppComponent implements OnInit {
       })
       .subscribe(
         () => {
+          this.tasks.push(task);
+
           this.openCollapse = false;
           this.showText = true;
           this.showAddSuccess = true;
@@ -51,18 +53,13 @@ export class AppComponent implements OnInit {
           setTimeout(() => {
             this.showAddSuccess = false;
           }, 3000);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
         },
         (error) => {
           this.showFailure = true;
           setTimeout(() => {
             this.showFailure = false;
           }, 3000);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+
           console.log(error);
         }
       );
@@ -98,22 +95,23 @@ export class AppComponent implements OnInit {
       )
       .subscribe(
         () => {
+          const index = this.tasks.findIndex(
+            (task: { id: number }) => task.id === id
+          );
+          if (index !== -1) {
+            this.tasks[index] = updatedTask;
+          }
+
           this.showUpdateSuccess = true;
           setTimeout(() => {
             this.showUpdateSuccess = false;
           }, 3000);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
         },
         (error) => {
           this.showFailure = true;
           setTimeout(() => {
             this.showFailure = false;
           }, 3000);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
           console.log(error);
         }
       );
@@ -122,22 +120,20 @@ export class AppComponent implements OnInit {
   deleteTask(id: number): void {
     this.http.delete<HttpResponse<Response>>(this.baseUrl + `/${id}`).subscribe(
       () => {
+        this.tasks = this.tasks.filter(
+          (task: { id: number }) => task.id !== id
+        );
+
         this.showDeleteSuccess = true;
         setTimeout(() => {
           this.showDeleteSuccess = false;
         }, 3000);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
       },
       (error) => {
         this.showFailure = true;
         setTimeout(() => {
           this.showFailure = false;
         }, 3000);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
         console.log(error);
       }
     );
